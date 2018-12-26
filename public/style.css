@@ -1,0 +1,275 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+#allUsuarios{
+  width: 35px;
+  margin: 40%;
+  padding: 0;
+}
+
+#myUsuarios{
+  width: 35px;
+  margin: 40%;
+  padding: 0;
+}
+
+#tela-cheia{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.effectUsers{
+  right: 0% !important;
+  transition: 1s;
+}
+
+.effectInput{
+  bottom: 0% !important;
+  transition: 1s;
+}
+
+main div.listaAllUsers {
+			float: left;
+			box-sizing: border-box;
+			min-width: 100%;
+			min-height: 40px;
+      font-size: 14px;
+      right: 100%;
+      transition: 1s;
+      overflow-x: hidden;
+    	overflow-y: scroll;
+      position: absolute;
+      top: 60px;
+      bottom: 60px;
+      z-index: 100;
+      background: white;
+}
+
+main div.listaMyUsers {
+		float: left;
+		box-sizing: border-box;
+		min-width: 100%;
+		min-height: 40px;
+    font-size: 14px;
+    overflow-x: hidden;
+  	overflow-y: scroll;
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+}
+
+main div.listaAllUsers div.usuario {
+	line-height: 70px;
+  padding: 0 40px;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+main div.listaMyUsers div.usuario {
+	line-height: 70px;
+  padding: 0 20px;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+main div.listaAllUsers div.usuario:hover, main div.listaMyUsers div.usuario:hover{
+  text-decoration: none;
+  background: #e5e5e536;
+  cursor: pointer;
+}
+
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > img {
+  height: 45px;
+  border-radius: 23px;
+}
+
+
+#mainChat{
+  display: none;
+
+}
+
+
+main div.chat {
+			margin: 0;
+			display: block;
+			float: left;
+			box-sizing: border-box;
+			width: 100%;
+			font-size: 1.0em;
+      border-left: 1px solid #aaa;
+      font-size: 14px;
+		}
+main div.chat input[type=text] {
+	display: block;
+	float: left;
+	box-sizing: border-box;
+	width: 100%;
+	font-size: 1.0em;
+	padding: 15px;
+  border-left: 0;
+}
+
+main div.chat .textarea {
+  position: absolute;
+  top: 60px;
+	display: block;
+	float: left;
+	height: 81%;
+	box-sizing: border-box;
+	width: 98.5%;
+	border: 0;
+  padding: 0.5em 20px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+  position: absolute;
+  background: white;
+  background-image: url("images/saolucas.jpg");
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#photoUserAutenticado, #photoUserParceiro{
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.textarea .message-container .message-width .message{
+  background: #e5e5e5;
+  width: fit-content;
+  padding: 10px 40px;
+  border-radius: 6px;
+  margin: 2px 5px 5px 5px;
+}
+
+.textarea .message-container .message-width .time{
+  font-size: 8pt;
+  width: fit-content;
+  color: gray;
+  font-style: italic;
+
+}
+
+.textarea .message-container .message-width{
+  width: 50%;
+}
+
+.right{
+    text-align: -webkit-right;
+}
+
+.right .message{
+  background-color: #007bff !important;
+  color: white;
+}
+
+.right .time{
+  margin-right: 7px;
+}
+
+.left{
+      text-align: -webkit-left;
+}
+
+.left .time{
+  margin-left: 4px;
+}
+
+.btn_chat{
+  border-radius: 20px !important;
+  padding: 7px !important;
+}
+
+#formulario{
+  height: 60px;
+  position: fixed;
+  bottom: -200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #f3f3f3;
+}
+#mensagem{
+  border-radius: 20px;
+  padding-left: 20px;
+  height: 40px;
+  width: 67%;
+  margin-right: 7px;
+}
+
+.dropdown{
+  float: right;
+}
+
+.dropdown-menu{
+  border: none !important;
+  background: none !important;
+}
+
+.dropdown-menu button{
+  margin-left: 14px;
+  margin-top: 5px;
+  box-shadow: 1px 1px 5px #072f5a
+}
+
+#btn_config{
+  margin: 0 15px;
+}
+
+.input_login{
+  border-radius: 20px !important;
+  padding-left: 15px !important;
+  font-size: 14px !important;
+}
+
+.form-group label{
+  margin-left: 14px;
+}
+
+#btn_autenticao{
+  float: right;
+  border-radius: 20px;
+  padding: 7px 20px;
+}
+
+.statusOnline img {
+  border: solid 1.2px #007bff;
+  padding: 3px;
+  background-clip: content-box;
+  box-shadow: 1px 1px 5px #e5e5e5;
+  margin-right: 7px;
+}
+
+.statusOffline img {
+  border: solid 1.2px #dcdbdb;
+  padding: 3px;
+  background-clip: content-box;
+  box-shadow: 1px 1px 5px #e5e5e5;
+  margin-right: 8px;
+  color: #dcdbdb;
+}
+
+#btn_admin{
+  display: none;
+}
+
+.spanNova{
+  float: right;
+  margin-top: 28px !important;
+}
+
+.spanNovaMensagem span{
+  display: block !important;
+}
