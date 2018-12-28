@@ -35,8 +35,40 @@
 
               $("#div_autenticacao").css("display", "none");
               $("#div_chat").css("display", "block");
+
+              time_logout = setInterval(timeLogout, 600000);
+
             }//fim if(user)
      });
+
+     var time_logout;
+     function timeLogout() {
+         console.log("TIME");
+         console.log("ttt " + this.logout);
+         this.logout = false;
+         console.log("wwwt " + this.logout);
+         logout();
+     }
+
+     function logout(){
+       if (this.logout == false) {
+         console.log("sair");
+         firebase.database().ref("users/" + userGlobal.uid).update({connected: 'false'});
+         firebase.auth().signOut();
+         $("#div_chat").css("display", "none");
+         $("#div_autenticacao").css("display", "block");
+       }
+     }
+
+     Repositorio.prototype.definirLogout = function(){
+       console.log("true");
+        this.logout = true;
+        clearInterval(time_logout);
+        time_logout = setInterval(timeLogout, 600000);
+     }
+
+     Repositorio.prototype.obterLogout = function(){ return this.logout; }
+
 
     function carregarContatos(executar, repositorio){
        if (executar == true) {
@@ -74,6 +106,7 @@
       this.indice = undefined;
       this.user_parceiro_key = undefined;
       this.chatAberto = false;
+      this.logout = false;
     }
 
     // ------------------------------------------------------

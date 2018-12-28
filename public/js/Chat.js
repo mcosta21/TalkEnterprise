@@ -1,3 +1,7 @@
+
+let refMensagens;
+
+
 function chat(repositorio){
   // let numMensagens = firebase.database().ref('users/' + user_parceiro_key + '/talks/' + userGlobal.uid + '/numMensagens/');
   // console.log(numMensagens);
@@ -9,6 +13,7 @@ function chat(repositorio){
   mensagemChat.innerHTML = '';
   let userGlobal = repositorio.obterUsuario();
   let user_parceiro_key = repositorio.obterUserParceiroKey();
+  // refMensagens = firebase.database().ref('conversations/' + id_chat + '/messages/');
 
   formulario.addEventListener('submit',function(event){
      if(document.forms["formChat"]["mensagem"].value != ''){
@@ -30,31 +35,31 @@ function chat(repositorio){
         }
     });
 
-  firebase.database().ref('conversations/' + id_chat + '/messages/').on('child_added', function(snapshot) {
-          let json = snapshot.val();
-          console.log("OI");
-          var div = document.getElementById(id_chat);
-           if (!div) {
-              var conteudoChat = document.createElement("div");
-              conteudoChat.innerHTML = MESSAGE_TEMPLATE;
-              div = conteudoChat.firstChild;
-              mensagemChat.appendChild(div);
-           }
-          div.querySelector('.time').textContent = json.time;
-          var messageElement = div.querySelector('.message');
-          messageElement.textContent = json.text;
-          if(json.user === userGlobal.uid){
-            div.classList.add("right");
-          }
-          else {
-            div.classList.add("left");
-          }
-          // Replace all line breaks by <br>.
-          messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-          mensagemChat.scrollTop = mensagemChat.scrollHeight;
-   });
- }
+    firebase.database().ref('conversations/' + id_chat + '/messages/').on('child_added', function(snapshot) {
+            let json = snapshot.val();
+            console.log("OI");
+            var div = document.getElementById(id_chat);
+             if (!div) {
+                var conteudoChat = document.createElement("div");
+                conteudoChat.innerHTML = MESSAGE_TEMPLATE;
+                div = conteudoChat.firstChild;
+                mensagemChat.appendChild(div);
+             }
+            div.querySelector('.time').textContent = json.time;
+            var messageElement = div.querySelector('.message');
+            messageElement.textContent = json.text;
+            if(json.user === userGlobal.uid){
+              div.classList.add("right");
+            }
+            else {
+              div.classList.add("left");
+            }
+            // Replace all line breaks by <br>.
+            messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+            mensagemChat.scrollTop = mensagemChat.scrollHeight;
+     });
 
+ }
 
 var MESSAGE_TEMPLATE =
   '<div class="message-container">' +

@@ -33,6 +33,7 @@ function myUsers (repositorio){
                `;
 
             aUsuario.addEventListener('click',function(event){
+                repositorio.definirLogout();
                 repositorio.definirIndice(index);
                 if (repositorio.bloquearCliqueParceiro() == id_parceiro) {
                   console.log("teste");
@@ -53,6 +54,7 @@ function myUsers (repositorio){
                   document.getElementById('nomeUserAutenticado').innerHTML = nome;
                   repositorio.definirUserParceiroKey(key);
                 }
+
                   // user_parceiro_key = key;
                   chat(repositorio);
 
