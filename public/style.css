@@ -2,6 +2,27 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+/* width */
+main div.chat > ::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+main div.chat > ::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+main div.chat > ::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+/* main div.chat > ::-webkit-scrollbar-thumb:hover { */
+  /* background: #b30000; */
+/* } */
+
 
 #allUsuarios{
   width: 35px;
@@ -10,8 +31,8 @@
 }
 
 #myUsuarios{
-  width: 35px;
-  margin: 40%;
+  width: 120px;
+  margin: 30%;
   padding: 0;
 }
 
@@ -33,34 +54,161 @@
   transition: 1s;
 }
 
+#painel_user{
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+#painel_user .dropdown-status{
+  font-weight: 600 !important;
+  font-size: 12px;
+  width: 90%;
+  margin-left: 5%
+}
+
+#painel_user .dropdown-status a{
+  font-weight: 600 !important;
+  color: gray;
+  animation-delay: 0.5s;
+}
+
+#painel_user_config{
+    border: none !important;
+    background: none !important;
+  }
+
+.icon-status div{
+  margin-bottom: 1px;
+  margin-right: 9px;
+  width: 7px;
+  height: 7px;
+  display: -webkit-inline-box;
+  border-radius: 100%;
+}
+
+#disponivel div{
+  background-color: #5F96EC;
+}
+#offline div{
+  background-color: #D2D3D5;
+}
+#ocupado div{
+  background-color: #dc3545;
+}
+#ausente div{
+  background-color: #ffc107;
+}
+
+#btn_config_user{
+  width: 100px;
+  margin-left: -60px;
+  background-color: #5F96EC;
+  margin-top: 5%;
+  box-shadow: 0px 1px 27px #0b54a20f;
+}
+
+#btn_config_user img{
+      float: right;
+      padding-right: 5px;
+}
+
+#btn_config_user img path{
+      fill: red;
+}
+
+.center{
+  text-align: center;
+}
+
+#photoPerfil{
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  margin-right: 10px;
+  border: 2px solid white;
+  box-shadow: 0px 1px 27px #0b54a226;
+}
+
+.dot {
+  height: 16px;
+  width: 16px;
+  background-color: #5F96EC;
+  border-radius: 50%;
+  /* display: inline-block; */
+  position: fixed;
+  margin-top: 50px;
+  margin-left: -30px;
+  border: 2px solid white;
+  box-shadow: 0px 1px 27px #0b54a226;
+}
+
+#nomePerfil{
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#btn_newConversa{
+  position: absolute;
+  top: 94%;
+  left: 16%;
+  transform: translate(-50%, -50%);
+  background-color: #5F96EC;
+  box-shadow: 0px 1px 27px #0b54a20f;
+}
+
+#btn_closeConversa{
+  position: absolute;
+  top: 94%;
+  left: 16%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  box-shadow: 0px 1px 27px #0b54a20f;
+}
+
+#nav_user_parceiro{
+  /* position: absolute; */
+  /* top: 0; */
+  height: 60px;
+  width: 98%;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  top: 10px;
+
+}
+
 main div.listaAllUsers {
-			float: left;
-			box-sizing: border-box;
-			min-width: 100%;
-			min-height: 40px;
-      font-size: 14px;
-      right: 100%;
-      transition: 1s;
-      overflow-x: hidden;
-    	overflow-y: scroll;
-      position: absolute;
-      top: 60px;
-      bottom: 60px;
-      z-index: 100;
-      background: white;
+  float: left;
+    box-sizing: border-box;
+    min-width: 100%;
+    min-height: 40px;
+    font-size: 14px;
+    right: 100%;
+    height: 100%;
+    transition: 1s;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    position: absolute;
+    top: 0px;
+    /* bottom: 60px; */
+    z-index: 100;
+    background: white;
+    box-shadow: 0px 1px 27px #0b54a20f;
 }
 
 main div.listaMyUsers {
-		float: left;
-		box-sizing: border-box;
-		min-width: 100%;
-		min-height: 40px;
-    font-size: 14px;
-    overflow-x: hidden;
-  	overflow-y: scroll;
-    position: absolute;
-    top: 60px;
-    bottom: 60px;
+  float: left;
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: 40px;
+  font-size: 13px;
+  /* overflow-x: hidden;
+  overflow-y: scroll;
+  position: absolute;
+  top: 60px;
+  bottom: 60px; */
 }
 
 main div.listaAllUsers div.usuario {
@@ -73,70 +221,116 @@ main div.listaAllUsers div.usuario {
 }
 
 main div.listaMyUsers div.usuario {
-	line-height: 70px;
-  padding: 0 20px;
+	line-height: 85px;
+  /* padding: 0 20px; */
 	display: block;
 	box-sizing: border-box;
-	width: 100%;
-	border-bottom: 1px solid #e5e5e5;
+  width: 90%;
+  border-radius: 8px;
+  margin: 30px 5px 5px 15px;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0px 1px 27px #0b54a20f
+}
+
+main div.listaMyUsers div.usuario div.clickChat {
+    margin-top: 10px;
+    background-color: white;
+    width: 8px;
+    height: 65px;
+    border-radius: 0px 10px 10px 0px;
+    float: left;
+    margin-right: 17px;
+    transition: 0.5s;
 }
 
 main div.listaAllUsers div.usuario:hover, main div.listaMyUsers div.usuario:hover{
   text-decoration: none;
-  background: #e5e5e536;
+  /* background: #e5e5e536; */
   cursor: pointer;
 }
 
 main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > img {
-  height: 45px;
-  border-radius: 23px;
+  height: 50px;
+  border-radius: 25px;
 }
 
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > ul {
+ position: absolute;
+ margin-top: 17px;
+ padding: 0;
+ list-style-type: none;
+ line-height: 20px;
+ display: inline-grid;
+}
+
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > ul > li {
+
+}
+
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > ul > li.nome {
+  float: left;
+  display: contents;
+  font-weight: 600;
+}
+
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > ul > li.status {
+  text-transform: capitalize;
+  font-size: 9px;
+  font-weight: 600;
+  color: #A9ABAE;
+  margin-top: -4%;
+}
+
+main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > ul > li.mensagem {
+  font-size: 10px;
+  font-weight: 600;
+  color: #727376;
+}
+
+.padding-zero{ padding: 0 !important;}
 
 #mainChat{
   display: none;
-
 }
 
+main{
+  display: contents;
+  font-size: 13px;
+}
 
 main div.chat {
-			margin: 0;
-			display: block;
-			float: left;
-			box-sizing: border-box;
-			width: 100%;
-			font-size: 1.0em;
-      border-left: 1px solid #aaa;
-      font-size: 14px;
-		}
+  display: contents;
+  width: 98%;
+  font-size: 13px;
+}
 main div.chat input[type=text] {
 	display: block;
-	float: left;
+	/* float: left; */
 	box-sizing: border-box;
 	width: 100%;
 	font-size: 1.0em;
 	padding: 15px;
-  border-left: 0;
+  border: 0;
+  background: #F2F3F3;
+  color: #96989A;
 }
 
 main div.chat .textarea {
-  position: absolute;
-  top: 60px;
-	display: block;
-	float: left;
-	height: 81%;
-	box-sizing: border-box;
-	width: 98.5%;
-	border: 0;
-  padding: 0.5em 20px;
-	overflow-x: hidden;
-	overflow-y: scroll;
-  position: absolute;
+  /* position: absolute; */
+  display: block;
+  height: 500px !important;
+  box-sizing: border-box;
+  width: inherit;
+  border: 0;
+  padding: 20px 20px 20px 30px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   background: white;
-  background-image: url("images/saolucas.jpg");
+  background-image: url(images/saolucas.jpg);
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
+  border-radius: 8px;
 }
 
 #photoUserAutenticado, #photoUserParceiro{
@@ -146,20 +340,25 @@ main div.chat .textarea {
   margin-right: 10px;
 }
 
-.textarea .message-container .message-width .message{
-  background: #e5e5e5;
+.textarea .message-container .message-width ul{
+  /* background: white; */
+  list-style-type: none;
+  box-shadow: 0px 1px 27px #0b54a226;
   width: fit-content;
-  padding: 10px 40px;
-  border-radius: 6px;
-  margin: 2px 5px 5px 5px;
+  border-radius: 8px;
+  padding: 5px 25px;
 }
 
-.textarea .message-container .message-width .time{
-  font-size: 8pt;
-  width: fit-content;
+.textarea .message-container .message-width .message{
+  font-weight: 600;
   color: gray;
-  font-style: italic;
+}
 
+.textarea .message-container  .time{
+  font-size: 7pt;
+  width: fit-content;
+  color: #A9ABAE;
+  /* font-style: italic; */
 }
 
 .textarea .message-container .message-width{
@@ -168,23 +367,46 @@ main div.chat .textarea {
 
 .right{
     text-align: -webkit-right;
+  }
+
+.right .entalhe-message{
+  float: right;
+  background-color: #5F96EC;
+  width: 8px;
+  border-radius: 8px 0px 0px 8px;
+  height: 27px;
+  margin-top: -50px;
+  position: relative;
+  animation-delay: 0.3s;
 }
 
 .right .message{
-  background-color: #007bff !important;
-  color: white;
+  /* box-shadow: 0px 1px 27px #0b54a226;
+  background: white;
+  font-weight: 600;
+  color: gray; */
 }
 
 .right .time{
-  margin-right: 7px;
 }
 
 .left{
-      text-align: -webkit-left;
+  text-align: -webkit-left;
+}
+
+.left .entalhe-message{
+  background-color: #A884BB;
+  width: 8px;
+  border-radius: 0px 8px 8px 0px;
+  height: 27px;
+  margin-top: -50px;
+  position: relative;
+  float: left;
+  animation-delay: 0.3s;
 }
 
 .left .time{
-  margin-left: 4px;
+  /* margin-left: 4px; */
 }
 
 .btn_chat{
@@ -193,39 +415,81 @@ main div.chat .textarea {
 }
 
 #formulario{
-  height: 60px;
-  position: fixed;
-  bottom: -200px;
-  width: 100%;
+  width: inherit;
   box-sizing: border-box;
-  padding: 10px;
-  background-color: #f3f3f3;
+  padding: 10px 0px;
+  background-color: white;
+  border-radius: 8px;
+  height: 60px;
+  box-shadow: 0px 1px 27px #0b54a20f;
+  margin-top: 10px;
 }
+
+#btn_enviar{
+  float: right;
+  width: 80px;
+  background-color: #5F96EC;
+  box-shadow: 0px 1px 27px #0b54a20f;
+  margin-right: -15px;
+  border-radius: 21px 0px 0px 20px !important;
+}
+
+#btn_enviar img{
+      float: left;
+      padding-left: : 5px;
+}
+
+#btn_emoji{
+  /* float: left; */
+  background-color: #5F96EC;
+  box-shadow: 0px 1px 27px #0b54a20f;
+  margin: 0px 15px;
+}
+
 #mensagem{
   border-radius: 20px;
-  padding-left: 20px;
   height: 40px;
-  width: 67%;
-  margin-right: 7px;
+  margin-left: -5px;
 }
 
-.dropdown{
+#painel_user_parceiro{
   float: right;
+  margin-right: -31px;
 }
 
-.dropdown-menu{
+#painel_user_parceiro .dropdown-menu{
   border: none !important;
   background: none !important;
+  margin-top: -49px;
+  /* float: right; */
+  left: 315px;
 }
 
-.dropdown-menu button{
-  margin-left: 14px;
-  margin-top: 5px;
-  box-shadow: 1px 1px 5px #072f5a
+#btn_sair{
+  background-color: #5F96EC;
 }
+
 
 #btn_config{
+  float: right;
+  width: 80px;
+  background-color: #5F96EC;
+  box-shadow: 0px 1px 27px #0b54a20f;
+  border-radius: 21px 0px 0px 20px !important;
   margin: 0 15px;
+
+}
+
+#btn_config img{
+      float: left;
+      padding-left: : 5px;
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Safari 3-8 */
+      transform: rotate(90deg);
+}
+
+.dropdown-toggle::after{
+  display: none !important;
 }
 
 .input_login{
@@ -245,24 +509,41 @@ main div.chat .textarea {
 }
 
 .statusOnline img {
-  border: solid 1.2px #007bff;
-  padding: 3px;
+  border: solid 2px #5F96EC;
+  padding: 2px;
   background-clip: content-box;
-  box-shadow: 1px 1px 5px #e5e5e5;
-  margin-right: 7px;
+  /* box-shadow: 1px 1px 5px #e5e5e5; */
+  margin-right: 6%;
 }
 
 .statusOffline img {
-  border: solid 1.2px #dcdbdb;
-  padding: 3px;
+  border: solid 2px #D2D3D5;
+  padding: 2px;
   background-clip: content-box;
-  box-shadow: 1px 1px 5px #e5e5e5;
-  margin-right: 8px;
-  color: #dcdbdb;
+  /* box-shadow: 1px 1px 5px #e5e5e5; */
+  margin-right: 6%;
+}
+
+.statusOcupado img {
+  border: solid 2px #dc3545;
+  padding: 2px;
+  background-clip: content-box;
+  /* box-shadow: 1px 1px 5px #e5e5e5; */
+  margin-right: 6%;
+}
+
+.statusAusente img {
+  border: solid 2px #ffc107;
+  padding: 2px;
+  background-clip: content-box;
+  /* box-shadow: 1px 1px 5px #e5e5e5; */
+  margin-right: 6%;
 }
 
 #btn_admin{
   display: none;
+  background-color: #5F96EC;
+  margin-top: 10px;
 }
 
 .spanNova{
@@ -272,4 +553,8 @@ main div.chat .textarea {
 
 .spanNovaMensagem span{
   display: block !important;
+  padding: 7px 13px;
+  margin-top: 6% !important;
+  margin-right: 7%;
+  background-image: linear-gradient(to right, #4881EC , #6CA2EC);
 }

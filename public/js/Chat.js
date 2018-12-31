@@ -31,7 +31,9 @@ function chat(repositorio){
         firebase.database().ref('conversations/' + id_chat + '/messages/').push(json);
         event.target.mensagem.value = '';
 
-        firebase.database().ref('users/' + user_parceiro_key + '/talks/' + userGlobal.uid).update({novoMensagem: 'true', lido: 'false', numMensagens: 0});
+        firebase.database().ref('users/' + user_parceiro_key + '/talks/' + userGlobal.uid).update({novoMensagem: 'true', lido: 'false', lastMensagem: json.text});
+        firebase.database().ref('users/' + userGlobal.uid + '/talks/' + user_parceiro_key).update({novoMensagem: 'false', lido: 'true', lastMensagem: json.text});
+
         }
     });
 
@@ -64,9 +66,13 @@ function chat(repositorio){
 var MESSAGE_TEMPLATE =
   '<div class="message-container">' +
     '<div class="message-width animated zoomIn">' +
-      '<div class="message"></div>' +
-      '<div class="time"></div>' +
+      '<ul>'+
+      '<li class="message"></li>' +
+      '<li class="time"></li>' +
+      // '<li class="entalhe-message"></li>' +
+      '</ul>' +
     '</div>'+
+    '<spam class="entalhe-message animated zoomIn"></spam>'
   '</div>';
 
 function getDate() {

@@ -3,9 +3,10 @@ function usersAll(repositorio){
 
   let divLista = document.querySelector('main > div.listaAllUsers');
   let allUsuarios = document.querySelector('#allUsuarios');
-  let myUser = repositorio.obterUsuario(); //firebase.auth().currentUser.uid;
+  let myUser = repositorio.obterUsuarioGlobal(); //firebase.auth().currentUser.uid;
   // console.log(myUser);
   // console.log(repositorio.obterUsuario());
+  let nameMyUser = repositorio.obterNomeUser();
 
   divLista.innerHTML = '';
    let todosUsuarios = firebase.database().ref("users");
@@ -36,9 +37,9 @@ function usersAll(repositorio){
                       div.style.background = "none";
                       div.style.boxShadow = "none";
                  });
-                 console.log(myUser.uid);
-                 firebase.database().ref('users/' + myUser.uid + '/talks/' + id_parceiro).set({displayName: nome, photoURL: photo, uid: key, novoMensagem: 'false', lido: 'false', numMensagens: 0});
-                 firebase.database().ref('users/' + id_parceiro + '/talks/' + myUser.uid).set({displayName: myUser.displayName, photoURL: myUser.photoURL, uid: myUser.uid, novoMensagem: 'false', lido: 'false', numMensagens: 0});
+
+                 firebase.database().ref('users/' + myUser.uid + '/talks/' + id_parceiro).update({displayName: nome, photoURL: photo, uid: key, novoMensagem: 'false', lido: 'false'});
+                 firebase.database().ref('users/' + id_parceiro + '/talks/' + myUser.uid).update({displayName: nameMyUser, photoURL: "myUser.photoURL", uid: myUser.uid, novoMensagem: 'false', lido: 'false'});
 
                  btn_newConversa.style.display = 'block'
                  btn_closeConversa.style.display = 'none';
@@ -46,7 +47,7 @@ function usersAll(repositorio){
                  inputChat.classList.add("effectInput");
                  displayContatos.classList.remove("effectUsers");
                  divMyLista.innerHTML = '';
-                 myUsers(this.repositorio);
+                 // myUsers(this.repositorio);
 
                  repositorio.definirIndice(index);
                  if(repositorio.obterIndice() == index) {
@@ -62,7 +63,7 @@ function usersAll(repositorio){
              });
              divLista.appendChild(aUsuario);
 
-             if(key == myUser){
+             if(key == myUser.uid){
                aUsuario.style.display = 'none';
              }
 

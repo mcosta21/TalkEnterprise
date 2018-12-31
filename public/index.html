@@ -46,10 +46,48 @@
 
             <div class="col-sm-3" style="padding-right: 0; box-shadow: 1px 1px 5px #e5e5e5">
 
-                  <nav class="navbar navbar-dark bg-dark" style="height: 60px; box-shadow: 1px 1px 5px #e5e5e5">
-                    <a class="navbar-brand" href="#">
+                  <nav class="navbar navbar-dark" style="height: 30%;">
+                    <!-- <a class="navbar-brand" href="#">
                       São Lucas Talk
-                    </a>
+                    </a> -->
+
+                    <div class="" id="painel_user">
+
+                    <section>
+                        <div class="dropdown animated slideInLeft">
+                          <button id="btn_config_user" type="button" class="btn btn_chat dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="images/settings.svg" width="25px"/>
+                          </button>
+                          <div id="painel_user_config" class="dropdown-menu animated slideInDown" aria-labelledby="dropdownMenu1">
+                            <button class="btn btn_chat" type="button" id="btn_sair"><img src="images/baseline_exit_to_app_white.png" width="25px"/></button>
+                            <button class="btn btn_chat" type="button" id="btn_admin"><a href="createUser.html"><img src="images/star.png" width="25px"/></a></button>
+
+                          </div>
+                        </div>
+                    </section>
+
+                      <div class="center">
+                        <img id="photoPerfil" src="images/user.png">
+                        <span class="dot"></span>
+                      </div>
+
+                      <section>
+                        <div class="center dropdown animated slideInDown" data-toggle="dropdown" id="dropdownMenu2"  aria-haspopup="true" aria-expanded="false" style="margin-top: 15px;">
+                          <span id="nomePerfil">Nome</span>
+                          <span><img src="images/expand_less_black_36x36.png" width="20px"/></span>
+                        </div>
+                        <div class="dropdown-menu dropdown-status animated slideInDown" aria-labelledby="dropdownMenu2">
+                          <a class="dropdown-item icon-status animated slideInLeft" id="disponivel" href="#"><div></div>Disponível</a>
+                          <a class="dropdown-item icon-status animated slideInLeft" id="offline" href="#"><div></div>Offline</a>
+                          <a class="dropdown-item icon-status animated slideInLeft" id="ocupado" href="#"><div></div>Ocupado</a>
+                          <a class="dropdown-item icon-status animated slideInLeft" id="ausente" href="#"><div></div>Ausente</a>
+                          <!-- <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a> -->
+                        </div>
+                    </section>
+
+
+                    </div>
                   </nav>
 
               <div >
@@ -61,37 +99,40 @@
 
                   <main>
                     <div class="listaMyUsers">
-              				<img id="myUsuarios" src="images/loading.gif" alt="Loading" />
+              				<img id="myUsuarios" src="images/loading_v2.gif" alt="Loading" />
               			</div>
                   </main>
               </div>
 
-              <nav class="navbar navbar-dark bg-dark" style="position: absolute; width: inherit; height: 60px; box-shadow: 1px 1px 5px #e5e5e5; bottom: 0; padding: 10px">
+              <button class="btn btn_chat" type="button" id="btn_newConversa"><img src="images/baseline_add_white.png" width="25px"/></button>
+              <button class="btn btn-danger btn_chat" type="button" style="display: none" id="btn_closeConversa"><img src="images/baseline_clear_white.png" width="25px" /></button>
+
+              <!-- <nav class="navbar navbar-dark bg-dark" style="position: absolute; width: inherit; height: 60px; box-shadow: 1px 1px 5px #e5e5e5; bottom: 0; padding: 10px">
                 <button class="btn btn-primary btn_chat"type="button" id="btn_newConversa"><img src="images/baseline_add_white.png" width="25px"/></button>
                 <button class="btn btn-danger btn_chat" type="button" style="display: none" id="btn_closeConversa"><img src="images/baseline_clear_white.png" width="25px" /></button>
-              </nav>
+              </nav> -->
 
             </div>
 
-            <div class="col-sm-9" style="padding: 0; z-index: 100 !important; background: white;">
-              <nav class="navbar navbar-light bg-light" style="position: absolute; top: 0; height: 60px; width: 100%">
+            <div class="col-sm-9" style="z-index: 100 !important; background: #EDEDEE;">
+
+              <nav class="navbar navbar-light" id="nav_user_parceiro">
                 <div class="col-6">
                     <img id="photoUserAutenticado" src="images/user.png">
                     <span id="nomeUserAutenticado">Nome de usuário</span>
                 </div>
 
-                <div class="col-6">
-                  <div class="dropdown">
-                    <button id="btn_config" type="button" class="btn  btn-primary btn_chat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="col-6 padding-zero">
+
+                  <div id="painel_user_parceiro" class="dropdrown padding-zero">
+                    <button id="btn_config" type="button" class="btn btn_chat dropdown-toggle animated slideInRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <img src="images/baseline_more_vert_white.png" width="25px"/>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="btn_config">
-                      <button class="btn btn-primary btn_chat animated zoomIn" type="button" id="btn_sair"><img src="images/baseline_exit_to_app_white.png" width="25px"/></button>
-                      <br>
-                      <button class="btn btn-primary btn_chat animated zoomIn" type="button" id="btn_admin"><a href="createUser.html"><img src="images/baseline_exit_to_app_white.png" width="25px"/></a></button>
+                    <div class="dropdown-menu">
+                      <button class="btn btn_chat animated slideInRight" type="button" id="btn_delete"><img src="images/delete.png" width="25px"/></button>
                     </div>
-
                   </div>
+
                 </div>
               </nav>
 
@@ -101,9 +142,16 @@
                   <div id="mensagemChat" class="textarea"></div>
 
           				<form id="formulario" name="formChat">
-                    <img id="photoUserParceiro" style="float: left" src="images/user.png">
-          					<input id="mensagem" class="form-control" name="mensagem" type="text" placeholder="Digite sua mensagem..." />
-                    <button class="btn btn-primary btn_chat" type="submit" id="btn_enviar"><img src="images/baseline_expand_less_white.png" width="25px"/></button>
+                    <!-- <img id="photoUserParceiro" style="float: left" src="images/user.png"> -->
+                    <div class="col-1 float-left">
+                      <button class="btn btn_chat" id="btn_emoji"><img src="images/emoji.png" width="25px"/></button>
+                    </div>
+                    <div class="col-10 float-left">
+                      <input id="mensagem" class="form-control" name="mensagem" type="text" placeholder="Digite sua mensagem..." />
+                   </div>
+                   <div class="col-1 float-left">
+                     <button class="btn btn_chat animated slideInRight" type="submit" id="btn_enviar"><img src="images/baseline_expand_less_white.png" width="25px"/></button>
+                  </div>
           				</form>
 
           			</div>

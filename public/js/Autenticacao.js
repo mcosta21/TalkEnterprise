@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 //VARIAVEIS GLOBAIS
  var repositorio = new Repositorio();
-
         //CLIQUE NO BOTÃO ENTRAR NA CONTA
        $("#btn_autenticao").on("click", function(){
 
@@ -35,15 +34,22 @@ $(document).ready(function(){
        });
 //------------------------------------------------------------------------------
 
-//CLIQUE NO BOTÃO SAIR
-       $("#btn_sair").on("click", function(){
-         firebase.database().ref("users/" + repositorio.obterUsuarioGlobal()).update({connected: 'false'});
-         firebase.auth().signOut();
-         $("#div_chat").css("display", "none");
-         $("#div_autenticacao").css("display", "block");
-       });
+
 
 //------------------------------------------------------------------------------
+
+      // $("#disponivel").on("click", function(){
+      //   firebase.database().ref("users/" + repositorio.obterUsuarioGlobal()).update({connected: 'false'});
+      //   firebase.auth().signOut();
+      // });
+
+
+}); // fim document ready
+
+
+
+
+
 
      // let divLista = document.querySelector('main > div.listaAllUsers');
      // let allUsuarios = document.querySelector('#allUsuarios');
@@ -275,5 +281,3 @@ $(document).ready(function(){
 //        let off = snapshot.val();
 //        console.log("teste2");
 //    });
-
-}); // fim document ready

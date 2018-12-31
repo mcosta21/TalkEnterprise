@@ -29,19 +29,19 @@
               }
               document.getElementById('photoUserAutenticado').innerHTML = userGlobal.photoURL;
               document.getElementById('nomeUserAutenticado').innerHTML = userGlobal.displayName;
-              firebase.database().ref("users/" + userGlobal.uid).update({connected: 'true'});
+              document.getElementById('nomePerfil').innerHTML = userGlobal.displayName;
+              repositorio.userName = userGlobal.displayName;
+
+              firebase.database().ref("users/" + userGlobal.uid).update({connected: 'disponivel'});
+
               carregarContatos(true, repositorio);
             });
-
               $("#div_autenticacao").css("display", "none");
               $("#div_chat").css("display", "block");
-
-              time_logout = setInterval(timeLogout, 600000);
-
             }//fim if(user)
      });
 
-     var time_logout;
+     var time_logout = setInterval(timeLogout, 600000);;
      function timeLogout() {
          console.log("TIME");
          console.log("ttt " + this.logout);
@@ -53,7 +53,7 @@
      function logout(){
        if (this.logout == false) {
          console.log("sair");
-         firebase.database().ref("users/" + userGlobal.uid).update({connected: 'false'});
+         firebase.database().ref("users/" + userGlobal.uid).update({connected: 'offline'});
          firebase.auth().signOut();
          $("#div_chat").css("display", "none");
          $("#div_autenticacao").css("display", "block");
@@ -74,6 +74,7 @@
        if (executar == true) {
          myUsers(repositorio);
          usersAll(repositorio);
+
        }
      }
 
@@ -97,12 +98,48 @@
         btn_newConversa.style.display = 'block'
       });
 
+      //CLIQUE NO BOTÃO SAIR
+      $("#btn_sair").on("click", function(){
+        firebase.database().ref("users/" + userGlobal.uid).update({connected: 'offline'});
+        firebase.auth().signOut();
+        $("#div_chat").css("display", "none");
+        $("#div_autenticacao").css("display", "block");
+      });
+
+      $("#disponivel").on("click", function(){
+        let dot = document.querySelector(".dot");
+        dot.style.backgroundColor = "#5F96EC";
+        firebase.database().ref("users/" + userGlobal.uid).update({connected: 'disponivel'});
+      });
+
+      $("#offline").on("click", function(){
+        let dot = document.querySelector(".dot");
+        dot.style.backgroundColor = "#D2D3D5";
+        firebase.database().ref("users/" + userGlobal.uid).update({connected: 'offline'});
+      });
+
+      $("#ocupado").on("click", function(){
+        let dot = document.querySelector(".dot");
+        dot.style.backgroundColor = "#dc3545";
+        firebase.database().ref("users/" + userGlobal.uid).update({connected: 'ocupado'});
+      });
+
+      $("#ausente").on("click", function(){
+        let dot = document.querySelector(".dot");
+        dot.style.backgroundColor = "#ffc107";
+        firebase.database().ref("users/" + userGlobal.uid).update({connected: 'ausente'});
+      });
+
    // -------------------------------------------------------------
 
   });
 
+
+
+
     function Repositorio() {
       this.usuario = undefined;
+      this.userName = undefined;
       this.indice = undefined;
       this.user_parceiro_key = undefined;
       this.chatAberto = false;
@@ -119,11 +156,15 @@
         return firebase.database().ref("users/" + this.usuario.uid + "/talks/");
     }
 
+    Repositorio.prototype.obterNomeUser = function () {
+      return this.userName;
+    }
+
     Repositorio.prototype.obterConversa = function(key) {
         return firebase.database().ref("users/" + this.usuario.uid + "/talks/" + key);
     }
 
-    // ------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     Repositorio.prototype.definirUsuario = function(usuario) { this.usuario = usuario; }
 
@@ -156,3 +197,8 @@
   }
 
   Repositorio.prototype.obterChatAberto = function(){return this.chatAberto;}
+
+  //  function setStatusUser(status){
+  //    let repositorio = Repositorio();
+  //    alert(repositorio.obterUsuarioGlobal());
+  // }
