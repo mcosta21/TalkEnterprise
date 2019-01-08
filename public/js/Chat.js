@@ -1,66 +1,100 @@
-
-let refMensagens;
-
-
 function chat(repositorio){
-  // let numMensagens = firebase.database().ref('users/' + user_parceiro_key + '/talks/' + userGlobal.uid + '/numMensagens/');
-  // console.log(numMensagens);
   $("#mainChat").css("display", "block");
-  let main = document.querySelector('mainChat');
+  // let main = document.querySelector('mainChat');
   let mensagemChat = document.querySelector('div.textarea');
   let formulario = document.querySelector('#formulario');
-  let id_chat = repositorio.idConversa();
   mensagemChat.innerHTML = '';
-  let userGlobal = repositorio.obterUsuario();
-  let user_parceiro_key = repositorio.obterUserParceiroKey();
-  // refMensagens = firebase.database().ref('conversations/' + id_chat + '/messages/');
 
   formulario.addEventListener('submit',function(event){
+    let user = repositorio.obterUsuario();
+    let parceiro_key = repositorio.obterParceiro();
+    let nova_mensagem = firebase.database().ref('conversations/' + repositorio.obterIdConversa() + '/messages/');
+
      if(document.forms["formChat"]["mensagem"].value != ''){
+       repositorio.definirNovoChat(false);
+
         mensagemChat.scrollTop = mensagemChat.scrollHeight;
         event.preventDefault();
         let json = {
-          name: userGlobal.displayName,
-          user: userGlobal.uid,
+          name: user.displayName,
+          user: user.uid,
           text: event.target.mensagem.value,
           time: getDate(),
           data: Date()
         };
         // let id_chat = repositorio.idConversa();
         // console.log("teste");
-        firebase.database().ref('conversations/' + id_chat + '/messages/').push(json);
+        // console.log(user.uid + " ---- user");
+        // console.log(parceiro_key + " ---- parceiro");
+
+        nova_mensagem.push(json);
         event.target.mensagem.value = '';
 
-        firebase.database().ref('users/' + user_parceiro_key + '/talks/' + userGlobal.uid).update({novoMensagem: 'true', lido: 'false', lastMensagem: json.text});
-        firebase.database().ref('users/' + userGlobal.uid + '/talks/' + user_parceiro_key).update({novoMensagem: 'false', lido: 'true', lastMensagem: json.text});
+        nova_mensagem.orderByChild('timestamp').startAt(Date.now()).on('value', function(snapshot) {
+                var div = document.getElementById(id_chat);
+                if (repositorio.obterNovoChat() == false) {
+                   if (!div) {
+                      var conteudoChat = document.createElement("div");
+                      conteudoChat.innerHTML = MESSAGE_TEMPLATE;
+                      div = conteudoChat.firstChild;
+                      mensagemChat.appendChild(div);
+                   }
+                  div.querySelector('.time').textContent = json.time;
+                  var messageElement = div.querySelector('.message');
+                  messageElement.textContent = json.text;
+                  if(json.user === user.uid){
+                    div.classList.add("right");
+                  }
+                  else {
+                    div.classList.add("left");
+                  }
+                  messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+                  mensagemChat.scrollTop = mensagemChat.scrollHeight;                  
+               }
+         });
 
+
+        firebase.database().ref('users/' + parceiro_key + '/talks/' + user.uid).update({novoMensagem: 'true', lido: 'false', lastMensagem: json.text});
+        firebase.database().ref('users/' + user.uid + '/talks/' + parceiro_key).update({novoMensagem: 'false', lido: 'true', lastMensagem: json.text});
         }
     });
+      carregarChat(repositorio);
+ }
 
-    firebase.database().ref('conversations/' + id_chat + '/messages/').on('child_added', function(snapshot) {
-            let json = snapshot.val();
-            console.log("OI");
-            var div = document.getElementById(id_chat);
-             if (!div) {
-                var conteudoChat = document.createElement("div");
-                conteudoChat.innerHTML = MESSAGE_TEMPLATE;
-                div = conteudoChat.firstChild;
-                mensagemChat.appendChild(div);
+ function carregarChat(repositorio){
+   $("#mainChat").css("display", "block");
+   let mensagemChat = document.querySelector('div.textarea');
+   mensagemChat.innerHTML = '';
+   firebase.database().ref('conversations/' + repositorio.obterIdConversa() + '/messages/').on('child_added', function(snapshot) {
+     // console.log("teste");
+           let user = repositorio.obterUsuario();
+           if (repositorio.obterNovoChat() == true) {
+             let json = snapshot.val();
+             // console.log("yes");
+
+             var div = document.getElementById(id_chat);
+
+              if (!div) {
+                 var conteudoChat = document.createElement("div");
+                 conteudoChat.innerHTML = MESSAGE_TEMPLATE;
+                 div = conteudoChat.firstChild;
+                 mensagemChat.appendChild(div);
+              }
+
+             div.querySelector('.time').textContent = json.time;
+             var messageElement = div.querySelector('.message');
+             messageElement.textContent = json.text;
+             if(json.user === user.uid){
+               div.classList.add("right");
              }
-            div.querySelector('.time').textContent = json.time;
-            var messageElement = div.querySelector('.message');
-            messageElement.textContent = json.text;
-            if(json.user === userGlobal.uid){
-              div.classList.add("right");
-            }
-            else {
-              div.classList.add("left");
-            }
-            // Replace all line breaks by <br>.
-            messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-            mensagemChat.scrollTop = mensagemChat.scrollHeight;
-     });
+             else {
+               div.classList.add("left");
+             }
+             messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+             mensagemChat.scrollTop = mensagemChat.scrollHeight;
 
+           }
+    });
  }
 
 var MESSAGE_TEMPLATE =
@@ -69,7 +103,6 @@ var MESSAGE_TEMPLATE =
       '<ul>'+
       '<li class="message"></li>' +
       '<li class="time"></li>' +
-      // '<li class="entalhe-message"></li>' +
       '</ul>' +
     '</div>'+
     '<spam class="entalhe-message animated zoomIn"></spam>'

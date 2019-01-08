@@ -1,26 +1,26 @@
 
 function myUsers (repositorio){
-  // var repositorio = new Repositorio(repositorio1);
-
   // Lista de usuario com conversation ---------------------------------------------------------
   let divMyLista = document.querySelector('main > div.listaMyUsers');
   let myUsuarios = document.querySelector('#myUsuarios');
-  let myUser = repositorio.obterUsuario(); //firebase.auth().currentUser.uid;
+  let nav_user_parceiro = document.querySelector('#nav_user_parceiro');
+  let nav_chat = document.querySelector('#mensagemChat');
+  let form = document.querySelector('#formulario');
 
-  // let user_parceiro_key;
-      let ref = repositorio.obterMinhasConversas();
-      // console.log("++ " + ref);
+  let user = repositorio.obterUsuario();
+  let ref = repositorio.obterMinhasConversas();
+
       ref.on('value',function(snapshot) {
         divMyLista.innerHTML = '';
         let lista = snapshot.val();
           Object.keys(lista).forEach(function (key,index,array) {
-            let lastmensagem = lista[key].lastMensagem;
-            console.log(lista[key]);
+            let lastmensagem = (lista[key].lastMensagem === undefined) ? ' ' : lista[key].lastMensagem;
             let nome = lista[key].displayName;
             let photo = (lista[key].photoURL === undefined) ? 'images/user.png' : lista[key].photoURL;
             let id_parceiro = key;
             var inputChat = document.querySelector('#formulario');
             let aUsuario = document.createElement('div');
+
             aUsuario.classList.add('usuario');
             aUsuario.innerHTML = `
                 <div class="clickChat"></div>
@@ -28,52 +28,55 @@ function myUsers (repositorio){
                 <img src="${photo}" />
                 <ul>
                   <li class="nome">${nome}</li>
-                  <li class="status">teste</li>
+                  <li class="status">Offline</li>
                   <li class="mensagem">${lastmensagem}</li>
                 </ul>
-                <!-- <p class="nome"></p> -->
-                <!-- <p class="status">2 horas atrás</p> -->
                 <span class="badge badge-pill badge-primary spanNova" style="display: none">Novo</span>
                `;
 
             aUsuario.addEventListener('click',function(event){
                 repositorio.definirLogout();
-                repositorio.definirIndice(index);
+                nav_user_parceiro.style.display = 'flex';
+                nav_chat.style.display = 'block';
+                form.style.display = 'block';
 
-                if (repositorio.bloquearCliqueParceiro() == id_parceiro) {
+                if (repositorio.obterIndice() == index) {
+                  // console.log("aaaaa");
                   return;
                 }
+
+                repositorio.definirIndice(index);
+
 
                 let listaLinks = document.querySelectorAll('div.listaMyUsers > div.usuario > div.clickChat');
                 listaLinks.forEach(div => {
                      div.style.backgroundColor = "white";
                     // div.classList.remove("clickChat");
                     // div.style.boxShadow = "none";
-               });
+                });
 
                 if(repositorio.obterIndice() == index) {
-                  repositorio.obterParceiro(id_parceiro);
-                  // aUsuario.style.background = "blue";
+                  // repositorio.obterParceiro(id_parceiro);
+                  repositorio.definirParceiro(key);
                   aUsuario.style.boxShadow = "0px 1px 27px #0b54a20f";
                   // // TROCA SPAM TEXT POR NOME DE USUARIO AUTENTICADO
                   document.getElementById('photoUserAutenticado').innerHTML = photo;
                   document.getElementById('nomeUserAutenticado').innerHTML = nome;
-                  repositorio.definirUserParceiroKey(key);
-                  // let teste = document.querySelector('div.listaMyUsers > div.usuario > div.clickChat');
-                  // teste.style.backgroundColor = "blue";
                   aUsuario.firstElementChild.style.backgroundColor = "#5F96EC";
-                  // aUsuario.firstChild.classList.add("clickChatAtual");
                 }
-                  // user_parceiro_key = key;
-                  chat(repositorio);
-                 inputChat.classList.add("effectInput");
+                // console.log(repositorio.obterParceiro() + "909090");
+                repositorio.definirIdConversa();
+                repositorio.definirNovoChat(true);
+                chat(repositorio);
+
+                inputChat.classList.add("effectInput");
             });
 
             divMyLista.appendChild(aUsuario);
             if (index == (array.length-1)) {
               myUsuarios.style.display = 'none';
             }
-            if(key == myUser.uid){
+            if(key == user.uid){
               aUsuario.style.display = 'none';
             }
 
@@ -84,7 +87,6 @@ function myUsers (repositorio){
       usuariosLogados.on("value",function(snapshot){
           let lista = snapshot.val();
           Object.keys(lista).forEach(function (key,index,array) {
-            console.log(lista[key]);
             let statusUser = lista[key].connected;
             let id = key;
             let elemento = document.querySelector('input[value=' + key + ']');
@@ -96,9 +98,6 @@ function myUsers (repositorio){
                   elemento.parentNode.classList.add("statusOnline");
                   let status = elemento.parentNode.getElementsByClassName("status")[0];
                   status.innerHTML = "Disponível";
-                  // console.log(elemento.parentNode.getElementsByClassName("status")[0]);
-                  // let teste = document.querySelector(elemento.parentNode + ' > ul > .status');
-                  // console.log(teste);
                 }
               }
               else if(statusUser == 'ocupado'){

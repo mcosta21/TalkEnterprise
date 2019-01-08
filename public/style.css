@@ -23,7 +23,6 @@ main div.chat > ::-webkit-scrollbar-thumb {
   /* background: #b30000; */
 /* } */
 
-
 #allUsuarios{
   width: 35px;
   margin: 40%;
@@ -170,13 +169,17 @@ main div.chat > ::-webkit-scrollbar-thumb {
 #nav_user_parceiro{
   /* position: absolute; */
   /* top: 0; */
+  display: none;
   height: 60px;
   width: 98%;
   background: white;
   border-radius: 8px;
   margin-bottom: 18px;
   top: 10px;
+}
 
+#mensagemChat{
+  display: none;
 }
 
 main div.listaAllUsers {
@@ -251,6 +254,7 @@ main div.listaAllUsers div.usuario:hover, main div.listaMyUsers div.usuario:hove
 
 main div.listaAllUsers div.usuario > img, main div.listaMyUsers div.usuario > img {
   height: 50px;
+  width: 50px;
   border-radius: 25px;
 }
 
@@ -423,6 +427,7 @@ main div.chat .textarea {
   height: 60px;
   box-shadow: 0px 1px 27px #0b54a20f;
   margin-top: 10px;
+  display: none;
 }
 
 #btn_enviar{
@@ -462,7 +467,8 @@ main div.chat .textarea {
   background: none !important;
   margin-top: -49px;
   /* float: right; */
-  left: 315px;
+  left: 245px;
+  text-align: -webkit-right;
 }
 
 #btn_sair{

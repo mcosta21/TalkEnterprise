@@ -47,12 +47,9 @@
             <div class="col-sm-3" style="padding-right: 0; box-shadow: 1px 1px 5px #e5e5e5">
 
                   <nav class="navbar navbar-dark" style="height: 30%;">
-                    <!-- <a class="navbar-brand" href="#">
-                      São Lucas Talk
-                    </a> -->
 
                     <div class="" id="painel_user">
-
+                      
                     <section>
                         <div class="dropdown animated slideInLeft">
                           <button id="btn_config_user" type="button" class="btn btn_chat dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -114,16 +111,19 @@
 
             </div>
 
-            <div class="col-sm-9" style="z-index: 100 !important; background: #EDEDEE;">
+            <div id="painel_chat" class="col-sm-9" style="z-index: 100 !important; background: #EDEDEE;">
 
-              <nav class="navbar navbar-light" id="nav_user_parceiro">
+              <section style="display: none; background: white; width: 98%; height: 95%; margin-top: 15px; border-radius: 8px; box-shadow: 0px 1px 27px #0b54a20f; padding: 60px">
+                <!-- <p>Nome: <span id="nomeUserAutenticado">Nome de usuário</span></p> -->
+
+              </section>
+
+              <nav class="navbar navbar-light animated slideInDown" id="nav_user_parceiro">
                 <div class="col-6">
                     <img id="photoUserAutenticado" src="images/user.png">
                     <span id="nomeUserAutenticado">Nome de usuário</span>
                 </div>
-
                 <div class="col-6 padding-zero">
-
                   <div id="painel_user_parceiro" class="dropdrown padding-zero">
                     <button id="btn_config" type="button" class="btn btn_chat dropdown-toggle animated slideInRight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <img src="images/baseline_more_vert_white.png" width="25px"/>
@@ -132,16 +132,15 @@
                       <button class="btn btn_chat animated slideInRight" type="button" id="btn_delete"><img src="images/delete.png" width="25px"/></button>
                     </div>
                   </div>
-
                 </div>
               </nav>
 
               <main>
                 <div class="chat" >
                     <!-- <img src="images/saolucas.jpg" width="60%" style="opacity:0.5; margin: 15% 20%" alt=""> -->
-                  <div id="mensagemChat" class="textarea"></div>
+                  <div id="mensagemChat" class="textarea animated zoomIn"></div>
 
-          				<form id="formulario" name="formChat">
+          				<form id="formulario" class="animated slideInUp" name="formChat">
                     <!-- <img id="photoUserParceiro" style="float: left" src="images/user.png"> -->
                     <div class="col-1 float-left">
                       <button class="btn btn_chat" id="btn_emoji"><img src="images/emoji.png" width="25px"/></button>
