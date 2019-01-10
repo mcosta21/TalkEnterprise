@@ -45,7 +45,13 @@ function myUsers (repositorio){
                   return;
                 }
 
+                // if(repositorio.obterParceiro() != key && repositorio.obterteste1() > 1){
+                //   repositorio.renovarTeste1();
+                //   console.log("renovar");
+                // }
+
                 repositorio.definirIndice(index);
+
 
 
                 let listaLinks = document.querySelectorAll('div.listaMyUsers > div.usuario > div.clickChat');
@@ -59,6 +65,7 @@ function myUsers (repositorio){
                   // repositorio.obterParceiro(id_parceiro);
                   repositorio.definirParceiro(key);
                   aUsuario.style.boxShadow = "0px 1px 27px #0b54a20f";
+                  // aUsuario.style.backgroundColor = "red";
                   // // TROCA SPAM TEXT POR NOME DE USUARIO AUTENTICADO
                   document.getElementById('photoUserAutenticado').innerHTML = photo;
                   document.getElementById('nomeUserAutenticado').innerHTML = nome;
@@ -67,9 +74,13 @@ function myUsers (repositorio){
                 // console.log(repositorio.obterParceiro() + "909090");
                 repositorio.definirIdConversa();
                 repositorio.definirNovoChat(true);
+                // repositorio.renovarTeste1();
                 chat(repositorio);
-
+                // novoChat(repositorio);
                 inputChat.classList.add("effectInput");
+
+
+
             });
 
             divMyLista.appendChild(aUsuario);

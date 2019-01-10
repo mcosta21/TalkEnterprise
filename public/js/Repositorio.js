@@ -32,6 +32,7 @@
               repositorio.userName = userGlobal.displayName;
               firebase.database().ref("users/" + userGlobal.uid).update({connected: 'disponivel'});
               carregarContatos(true, repositorio);
+
             });
               $("#div_autenticacao").css("display", "none");
               $("#div_chat").css("display", "block");
@@ -139,6 +140,7 @@
       this.chatAberto = false;
       this.logout = false;
       this.novo_chat = false;
+      this.teste = 1;
     }
 
     // ------------------------------------------------------
@@ -194,6 +196,17 @@
     Repositorio.prototype.obterNovoChat = function(){
       return this.novo_chat;
     }
+
+    Repositorio.prototype.renovarTeste1 = function() { this.teste = 1;}
+
+    Repositorio.prototype.definirteste1 = function (){ this.teste++;}
+
+    Repositorio.prototype.obterteste1 = function () {
+      return this.teste;
+    }
+
+
+
 
 
     // Repositorio.prototype.abrirNovoChat = function(user){

@@ -345,7 +345,7 @@ main div.chat .textarea {
 }
 
 .textarea .message-container .message-width ul{
-  /* background: white; */
+  background: white;
   list-style-type: none;
   box-shadow: 0px 1px 27px #0b54a226;
   width: fit-content;
