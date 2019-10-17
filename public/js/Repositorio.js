@@ -2,12 +2,12 @@
   $(document).ready(function(){
 
    var config = {
-     apiKey: "AIzaSyCGWLwJZi4blzQfSGhGPe31CsyouMDF--Y",
+     apiKey: "***--Y",
      authDomain: "saolucastalk.firebaseapp.com",
-     databaseURL: "https://saolucastalk.firebaseio.com",
-     projectId: "saolucastalk",
-     storageBucket: "saolucastalk.appspot.com",
-     messagingSenderId: "1006700733079"
+     databaseURL: "https://***.firebaseio.com",
+     projectId: "***",
+     storageBucket: "***.appspot.com",
+     messagingSenderId: "***"
    };
    firebase.initializeApp(config);
 
